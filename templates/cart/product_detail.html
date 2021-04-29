@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load crispy_forms_tags %}
+
+
+
+
+{% block content %}
+
+<body class="product-details-body">
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a href="{% url 'home' %}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">{{ product.title }}</strong>
+                    <a href="{{ product.funfun }}" target="_blank">Product</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="mb-5 row">
+                <div class="col-md-6" data-aos="fade">
+                    <img src="{{ product.image.url }}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <h2 class="product-detail-title text-black">{{ product.title }}</h2>
+                    <hr style="border: 1px solid #e7e7e7;">
+                    <p class="mb-4 mt-4 product-detail-description">{{ product.description }}</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="add-to-cart-btn mt-4">
+                            <i class="fas fa-shopping-cart mr-1"></i>
+                            Add To Cart
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for block in page.product_page_content  %}
+    {% include_block block %}
+    {% endfor %}
+
+</body>
+{% endblock content %}

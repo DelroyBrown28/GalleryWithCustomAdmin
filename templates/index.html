@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+
+<div class="site-blocks-cover" style="background-image: url({% static 'images/hero.jpg'%})"
+data-aos="fade">
+
+
+</div>
+
+{% for block in page.index_page_content  %}
+{% include_block block %}
+{% endfor %}
+
+{% endblock content %}

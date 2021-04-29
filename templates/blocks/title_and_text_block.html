@@ -1,0 +1,6 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="container mt-5 flexed title-text-container">
+    <h4 class="title-text-title">{{ self.title }}</h4>
+<span class="title-text-richtext mt-3">{{ self.text|richtext }}</span>
+</div>

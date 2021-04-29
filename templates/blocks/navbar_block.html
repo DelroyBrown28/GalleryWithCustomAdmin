@@ -1,0 +1,30 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+
+
+{% for nav_stuff in self.nav_items  %}
+<nav>
+    <div class="nav-wrapper">
+        <a class="brand-logo navbar-logo-link" href="/">
+            {% image self.navbar_logo fill-75x47 as navbar_logo %}
+            <!-- <img src="{{ navbar_logo.url }}" class="navbar-logo-img" alt="Arinze Stanley Logo"> -->
+            <p style="font-family: 'Bebas Neue', cursive;">ARINZE STANLEY</p>
+
+        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{{ nav_stuff.navbar_link_1.url }}">{{ nav_stuff.navbar_link_text_1 }}</a></li>
+            <li class="nav-about-button">{{ nav_stuff.navbar_link_text_2 }}</li>
+            <li><a href="{{ nav_stuff.navbar_link_3.url }}">{{ nav_stuff.navbar_link_text_3 }}</a></li>
+            <li><a href="{{ nav_stuff.navbar_link_4.url }}">{{ nav_stuff.navbar_link_text_4 }}</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="{{ nav_stuff.navbar_link_1.url }}">{{ nav_stuff.navbar_link_text_1 }}</a></li>
+    <li><a href="{{ nav_stuff.navbar_link_2.url }}">{{ nav_stuff.navbar_link_text_2 }}</a></li>
+    <li><a href="{{ nav_stuff.navbar_link_3.url }}">{{ nav_stuff.navbar_link_text_3 }}</a></li>
+    <li><a href="{{ nav_stuff.navbar_link_4.url }}">{{ nav_stuff.navbar_link_text_4 }}</a></li>
+</ul>
+{% endfor %}

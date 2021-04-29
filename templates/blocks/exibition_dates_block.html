@@ -1,0 +1,13 @@
+<section class="exibition-dates-section mt-5 flexed">
+    
+    <!-- <H5 class="mb-5 exibition-section-title">{{ self.exibition_section_title }}</H5> -->
+    {% for exibition_stuff in self.exibition_dates  %}
+    <div class="exibition-cards flexed">
+        <h3 class="mb-2 mt-2">{{ exibition_stuff.city_or_town_location }}</h3>
+        <span class="exibition-venue">{{ exibition_stuff.venue }}</span>
+        <span class="exibition-date">{{ exibition_stuff.date }}</span>
+        <a class="exibition-btn flexed mt-3 mb-3 big-btn-style" href="{{ exibition_stuff.buy_tickets }}" target="_blank">Purchase Tickets</a>
+    </div>
+    {% endfor %}
+
+</section>

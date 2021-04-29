@@ -1,0 +1,19 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+<div class="cta-wrap flexed">
+    <div class="col-sm-12 text-btn-wrap-mobile flexed">
+        <h4>{{ self.title }}</h4>
+        <p>{{ self.text|richtext }}</p>
+        <a class="big-btn-style-dark flexed" href="{{ self.button_page.url }}">{{ self.button_text }}</a>
+    </div>
+
+
+    <div class="col-sm-6 text-btn-wrap flexed">
+        <h4>{{ self.title }}</h4>
+        <p>{{ self.text|richtext }}</p>
+        <a class="big-btn-style-dark flexed" href="{{ self.button_page.url }}">{{ self.button_text }}</a>
+    </div>
+    {% image self.cta_image fill-960x1080 as cta_bg_image %}
+    <div class="col-sm-6 cta-img" style="background: url('{{ cta_bg_image.url }}');"></div>
+</div>

@@ -1,0 +1,31 @@
+{% load wagtailimages_tags %}
+
+<section class="art-card-section mt-5">
+    <!-- <h4 id="featuredArt" class="home-page-art-title">{{ self.gallery_block_title }}</h4> -->
+
+    <div class="art-cards-wrap flexed">
+        {% for art_card in self.art_cards %}
+        <div class="card art-cards">
+            <div class="flexed hidden-info-card">
+
+                <div class="hidden-info-text-btn-wrap flexed">
+                    {{ art_card.title_of_picture }}
+                    {% if art_card.button_to_site_page %}
+                    <a href="{{ art_card.button_to_site_page.url }}" class="mt-3 art-card-store-btn flexed">
+                        {{ art_card.button_text }}
+                    </a>
+                    {% elif art_card.button_to_external_URL %}
+                    <a href="{{ art_card.button_to_external_URL }}" class="mt-3 art-card-store-btn flexed">
+                        {{ art_card.button_text }}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-image art-card-image waves-effect waves-block waves-dark">
+                {% image art_card.image fill-600x400 as img %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="card-img-top art-card-image" />
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>

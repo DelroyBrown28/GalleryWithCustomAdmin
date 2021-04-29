@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<body class="cart-body">
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0">
+                    <a href="{% url 'home' %}">Home</a>
+                    <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Cart</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="site-blocks-table flexed">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                <tr class="cart-item-body">
+                                    <td class="product-thumbnail">
+                                        <img src="{{ item.product.image.url }}" class="img-fluid">
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h5 text-black">{{ item.product.title }}</h2>
+                                        <small>Size:<br>{{ item.size.name }}</small>
+                                    </td>
+                                    <td>
+                                        <div class="input-group" style="max-width: 100%;">
+                                            <div class="input-group-prepend">
+                                                <a href="{% url 'cart:decrease-quantity' item.id %}"
+                                                    class="decrement-btn flexed">
+                                                    <i class="fas fa-chevron-down"></i>
+                                                </a>
+                                            </div>
+                                            <input type="text" class="input-quantity form-control text-center"
+                                                value="{{ item.quantity }}">
+                                            <div class="input-group-append">
+                                                <a href="{% url 'cart:increase-quantity' item.id %} "
+                                                    class="increment-btn flexed">
+                                                    <i class="fas fa-chevron-up"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        £{{ item.get_total_item_price }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'cart:remove-from-cart' item.id %}"
+                                            class="flexed delete-from-cart-btn">
+                                            <i class="fas fa-trash-alt mb-2"></i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colSpan='6'>
+                                        There are no items in your cart.
+                                        <a class="back-to-collection-btn" href="{% url 'cart:product-list' %}">Back to collection</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {% if order.items.count > 0 %}
+
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="p-0 col-md-3">
+                        <div class="row">
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="total-title">Total</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="total-text">£{{ order.get_total }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 p-0">
+                            <a class="checkout-btn flexed" href="{% url 'cart:checkout' %}"><i
+                                    class="fas fa-cart-plus mr-2"></i> Checkout</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+    </div>
+</body>
+{% endblock content %}
